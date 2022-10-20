@@ -1,78 +1,57 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-class SinglyLinkedListNode {
+class node{
     public:
-        int data;
-        SinglyLinkedListNode *next;
+    int data;
+    node*next;
 
-        SinglyLinkedListNode(int node_data) {
-            this->data = node_data;
-            this->next = nullptr;
-        }
-};
-
-class SinglyLinkedList {
-    public:
-        SinglyLinkedListNode *head;
-        SinglyLinkedListNode *tail;
-
-        SinglyLinkedList() {
-            this->head = nullptr;
-            this->tail = nullptr;
-        }
-
-        void insert_node(int node_data) {
-            SinglyLinkedListNode* node = new SinglyLinkedListNode(node_data);
-
-            if (!this->head) {
-                this->head = node;
-            } else {
-                this->tail->next = node;
-            }
-
-            this->tail = node;
-        }
-};
-
-
-void free_singly_linked_list(SinglyLinkedListNode* node) {
-    while (node) {
-        SinglyLinkedListNode* temp = node;
-        node = node->next;
-
-        free(temp);
+    node(int val){
+        data=val;
+        next=NULL;
     }
+};
+
+void insertAthead(node* &head,int val){
+    node*n=new node(val);
+    n->next=head;
+    head=n;
 }
 
+void insertAtTail(node* &head,int val){
+    node*n=new node(val);
 
-void printLinkedList(SinglyLinkedListNode* head) {
-
-if (head == NULL) {
+    if(head==NULL){
+        head=n;
         return;
     }
     
-    cout << head->data << endl;
-    printLinkedList(head->next);
+    node* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=n;
 }
 
-int main()
-{
-    SinglyLinkedList* llist = new SinglyLinkedList();
-
-    int llist_count;
-    cin >> llist_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    for (int i = 0; i < llist_count; i++) {
-        int llist_item;
-        cin >> llist_item;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        llist->insert_node(llist_item);
+void display(node* head){
+    node* temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
     }
+    cout<<endl;
+}
 
-    printLinkedList(llist->head);
+int main(){
 
-    return 0;
+    node* head=NULL;
+    insertAtTail(head,1);
+    insertAtTail(head,2);
+    insertAtTail(head,3);
+    insertAtTail(head,4);
+    display(head);
+    insertAthead(head,5);
+    display(head);
+
+return 0;
 }

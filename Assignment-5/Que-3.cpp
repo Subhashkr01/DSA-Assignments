@@ -1,84 +1,57 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-class SinglyLinkedListNode {
+class node{
     public:
-        int data;
-        SinglyLinkedListNode *next;
+    int data;
+    node*next;
 
-        SinglyLinkedListNode(int node_data) {
-            this->data = node_data;
-            this->next = nullptr;
-        }
+    node(int val){
+        data=val;
+        next=NULL;
+    }
 };
 
-class SinglyLinkedList {
-    public:
-        SinglyLinkedListNode *head;
-        SinglyLinkedListNode *tail;
+void insertAthead(node* &head,int val){
+    node*n=new node(val);
+    n->next=head;
+    head=n;
+}
 
-        SinglyLinkedList() {
-            this->head = nullptr;
-            this->tail = nullptr;
-        }
+void insertAtTail(node* &head,int val){
+    node*n=new node(val);
 
-};
-
-void print_singly_linked_list(SinglyLinkedListNode* node, string sep, ofstream& fout) {
-    while (node) {
-        fout << node->data;
-
-        node = node->next;
-
-        if (node) {
-            fout << sep;
-        }
+    if(head==NULL){
+        head=n;
+        return;
     }
-}
-
-void free_singly_linked_list(SinglyLinkedListNode* node) {
-    while (node) {
-        SinglyLinkedListNode* temp = node;
-        node = node->next;
-
-        free(temp);
-    }
-}
-
-SinglyLinkedListNode* insertNodeAtHead(SinglyLinkedListNode* llist, int data) {
- 
- SinglyLinkedListNode *newN = new SinglyLinkedListNode(data);
- newN->next = llist;
- return newN;
-
-}
-
-
-int main()
-{
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    SinglyLinkedList* llist = new SinglyLinkedList();
-
-    int llist_count;
-    cin >> llist_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    for (int i = 0; i < llist_count; i++) {
-        int llist_item;
-        cin >> llist_item;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     
-        SinglyLinkedListNode* llist_head = insertNodeAtHead(llist->head, llist_item);
-        llist->head = llist_head;
+    node* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
     }
+    temp->next=n;
+}
 
-    print_singly_linked_list(llist->head, "\n", fout);
-    fout << "\n";
+void display(node* head){
+    node* temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp=temp->next;
+    }
+    cout<<endl;
+}
 
-    free_singly_linked_list(llist->head);
+int main(){
 
-    fout.close();
+    node* head=NULL;
+    insertAtTail(head,1);
+    insertAtTail(head,2);
+    insertAtTail(head,3);
+    insertAtTail(head,4);
+    display(head);
+    insertAthead(head,5);
+    display(head);
 
-    return 0;
+return 0;
 }
