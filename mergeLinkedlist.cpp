@@ -24,7 +24,7 @@ Node *newNode(int val){
  	int a; //this variable will be used to read the input from user
  	
  	Node *head = NULL; //after creating the linkedlist we will returns it's head
- 	Node *tail = NULL; //we will be inserting the new node at tail ex: if linked list is 1->2->null
+ 	Node *tail = NULL; //we will be inserting the new node at tail ex: if linked list is 1->2->NULL
  					   // new node will be inserted behind 2 => tail->next = new Node()
  	
  	//we will need to read the n inputs from user and create n nodes;
@@ -56,14 +56,44 @@ void printLinkedList(Node *head){
 		cout<<head->data<<"-> "; 	//print the data of head
 		head = head->next; //move the head to next node
 	}
-	cout<<"null\n";
+	cout<<"NULL\n";
 }
 
 /**
  * mergeTwoSortedLinkedList will take head for two sorted linked list as input and will merge them such that the final linked list is sorted
  * */
-Node *mergeTwoSortedLinkedList(Node *head1, Node* head2){
-	return NULL;
+Node *mergeTwoSortedLinkedList(Node* head1, Node* head2){
+       
+	   Node *p1=head1;
+	   Node *p2=head2;
+	   Node *dummyNode=new Node();
+	   Node* p3=dummyNode;
+
+	   while(p1!=NULL && p2!=NULL){
+		   if(p1->data<p2->data){
+			   p3->next=p1;
+			   p1=p1->next;
+		   }
+		   else{
+			   p3->next=p2;
+			   p2=p2->next;
+		   }
+		   p3=p3->next;
+	   }
+
+	   while(p1!=NULL){
+		   p3->next=p1;
+		   p1=p1->next;
+		   p3=p3->next;
+	   }
+
+	   while(p2!=NULL){
+		   p3->next=p2;
+		   p2=p2->next;
+		   p3=p3->next;
+	   }
+
+	return dummyNode->next4;
 }
 
 int main() {
