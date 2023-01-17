@@ -67,7 +67,7 @@ Node *mergeTwoSortedLinkedList(Node* head1, Node* head2){
 	   Node *p1=head1;
 	   Node *p2=head2;
 	   Node *dummyNode=new Node();
-	   Node* p3=dummyNode;
+	   Node *p3=dummyNode;
 
 	   while(p1!=NULL && p2!=NULL){
 		   if(p1->data<p2->data){
@@ -93,7 +93,7 @@ Node *mergeTwoSortedLinkedList(Node* head1, Node* head2){
 		   p3=p3->next;
 	   }
 
-	return dummyNode->next4;
+	return dummyNode->next;
 }
 
 int main() {
